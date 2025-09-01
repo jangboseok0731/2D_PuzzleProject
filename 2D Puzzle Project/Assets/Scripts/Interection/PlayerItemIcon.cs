@@ -17,7 +17,6 @@ public class PlayerItemIcon : MonoBehaviour
         bookIcon.SetActive(false);
         redBallIcon.SetActive(false);
     }
-
     public void UpdateIcon(ItemType type)
     {
 
