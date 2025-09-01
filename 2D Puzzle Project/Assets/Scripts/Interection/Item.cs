@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
     [SerializeField] private ItemType itemtype;
-    [SerializeField] private Image ZImage;
     
     // 상호작용시 호출 함수
     public ItemType GetItemType()
