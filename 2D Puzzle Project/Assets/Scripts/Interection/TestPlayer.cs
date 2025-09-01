@@ -54,10 +54,10 @@ public class TestPlayer : MonoBehaviour
             ItemPlaceSpot spot = col.GetComponent<ItemPlaceSpot>();
             if (spot != null && heldItem != null)
             {
+
                 spot.PlaceItem(heldItem);
                 heldItem = null;
                 iconManager.UpdateIcon(ItemType.None);
-                Debug.Log("아이콘 초기화");
                 return;
             }
             
