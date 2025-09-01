@@ -21,5 +21,6 @@ public class Item : MonoBehaviour
     {
         transform.position = pos;
         gameObject.SetActive(true);
+
     }
 }

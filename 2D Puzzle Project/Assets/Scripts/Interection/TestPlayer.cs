@@ -27,7 +27,7 @@ public class TestPlayer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-
+            TryInteract();
         }
     }
     private void FixedUpdate()
@@ -40,6 +40,7 @@ public class TestPlayer : MonoBehaviour
 
         foreach(var col in collider)
         {
+            // 아이템 줍기
             Item item = col.GetComponent<Item>();
             if(item != null && heldItem == null)
             {
@@ -49,12 +50,14 @@ public class TestPlayer : MonoBehaviour
                 Debug.Log($"{item.GetItemType()} 아이템을 주었당");
                 return;
             }
+            // 아이템 놓기
             ItemPlaceSpot spot = col.GetComponent<ItemPlaceSpot>();
             if (spot != null && heldItem != null)
             {
                 spot.PlaceItem(heldItem);
                 heldItem = null;
                 iconManager.UpdateIcon(ItemType.None);
+                Debug.Log("아이콘 초기화");
                 return;
             }
             

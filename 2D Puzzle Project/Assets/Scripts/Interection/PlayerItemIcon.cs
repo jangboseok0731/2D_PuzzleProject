@@ -19,7 +19,6 @@ public class PlayerItemIcon : MonoBehaviour
     }
     public void UpdateIcon(ItemType type)
     {
-
         //해당 아이콘 키깃
         switch (type)
         {
@@ -31,6 +30,12 @@ public class PlayerItemIcon : MonoBehaviour
                 break;
             case ItemType.RedBall:
                 redBallIcon.SetActive(true);
+                break;
+            case ItemType.None:
+                duckIcon.SetActive(false);
+                bookIcon.SetActive(false);
+                redBallIcon.SetActive(false);
+                Debug.Log("아이콘 초기화");
                 break;
         }
     }
