@@ -23,4 +23,8 @@ public class Item : MonoBehaviour
         gameObject.SetActive(true);
 
     }
+    public void ResetPosition()
+    {
+
+    }
 }

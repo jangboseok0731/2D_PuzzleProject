@@ -4,11 +4,42 @@ using UnityEngine;
 
 public class ItemPlaceSpot : MonoBehaviour
 {
+    private Chair placedChair;
+    private Item placedItem;
+    public bool HasItem => placedItem != null;
+    public bool IsPlaced => placedChair != null;
+
     [SerializeField] private Transform placePoint;
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Chair chair = collision.GetComponent<Chair>();
+        if(chair != null)
+        {
+            placedChair = chair;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Chair chair = collision.GetComponent<Chair>();
+        if(chair != null && chair == placedChair)
+        {
+            placedChair = null;
+        }
+    }
 
     public void PlaceItem(Item item)
     {
-        item.OnPlace(placePoint.position);
+        placedItem = item;
+        item.transform.position = transform.position;
+        item.gameObject.SetActive(true);
+    }
+
+    public Item GetItem()
+    {
+        Debug.Log("¾È³ç");
+        return placedItem;
     }
 
 }

@@ -37,9 +37,15 @@ public class TestPlayer : MonoBehaviour
     private void TryInteract()
     {
         Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, itemPicradius);
+        
 
         foreach(var col in collider)
         {
+            IInteractable interactable = col.GetComponent<IInteractable>();
+            if(interactable != null)
+            {
+                interactable.Interact();
+            }
             // 아이템 줍기
             Item item = col.GetComponent<Item>();
             if(item != null && heldItem == null)
@@ -47,20 +53,36 @@ public class TestPlayer : MonoBehaviour
                 heldItem = item;
                 item.OnPick();
                 iconManager.UpdateIcon(item.GetItemType());
-                Debug.Log($"{item.GetItemType()} 아이템을 주었당");
                 return;
             }
             // 아이템 놓기
             ItemPlaceSpot spot = col.GetComponent<ItemPlaceSpot>();
+            
             if (spot != null && heldItem != null)
             {
+                if(spot.GetItem() == null)
+                {
+                    spot.PlaceItem(heldItem);
+                    Debug.Log(spot);
+                    heldItem = null;
+                    iconManager.UpdateIcon(ItemType.None);
+                    return;
 
-                spot.PlaceItem(heldItem);
-                heldItem = null;
-                iconManager.UpdateIcon(ItemType.None);
+                }
+                else
+                {
+                    Item SpotItem = spot.GetItem();
+                    spot.PlaceItem(heldItem);
+                    heldItem = SpotItem;
+                    heldItem.OnPick();
+                    iconManager.UpdateIcon(ItemType.None);
+                    iconManager.UpdateIcon(heldItem.GetItemType());
+                }
                 return;
+
             }
             
+
         }
     }
 
